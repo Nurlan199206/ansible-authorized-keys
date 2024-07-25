@@ -1,0 +1,6 @@
+[proxmox]
+k8s-master01 ansible_host=192.168.1.161
+k8s-master02 ansible_host=192.168.1.162
+k8s-master03 ansible_host=192.168.1.163
+k8s-node01 ansible_host=192.168.1.164
+k8s-node02 ansible_host=192.168.1.165
