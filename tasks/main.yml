@@ -4,3 +4,25 @@
     user: nurlan
     state: present
     key: "{{ lookup('file', '../files/id_rsa.pub') }}"
+
+
+- name: Replace PasswordAuthentication no with yes
+  replace:
+    path: /etc/ssh/sshd_config.d/60-cloudimg-settings.conf
+    regexp: '^PasswordAuthentication no'
+    replace: 'PasswordAuthentication yes'
+
+- name: Ensure PasswordAuthentication is uncommented and set to yes
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#PasswordAuthentication'
+    line: 'PasswordAuthentication yes'
+    state: present
+    backrefs: yes
+
+- name: Restart SSH service to apply changes
+  service:
+    name: sshd
+    state: restarted
+
+
